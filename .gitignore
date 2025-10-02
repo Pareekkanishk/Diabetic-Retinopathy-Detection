@@ -1,4 +1,6 @@
 \venv
 organized_dataset/
-train_dataset/
-val_dataset/
+train_dataset_cropped/
+val_dataset_cropped/
+train_dataset_clahe/
+val_dataset_clahe/
