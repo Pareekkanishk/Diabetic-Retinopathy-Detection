@@ -6,3 +6,10 @@ train_dataset_clahe/
 val_dataset_clahe/
 resnet50.keras
 inceptionv3.keras
+test_organized/
+test_preprocessed/
+test_cropped/
+
+
+
+
