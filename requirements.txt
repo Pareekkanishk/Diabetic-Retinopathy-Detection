@@ -7,3 +7,4 @@ seaborn
 keras
 opencv-python
 tqdm
+flask

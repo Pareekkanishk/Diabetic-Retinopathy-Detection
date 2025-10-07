@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DR Detection System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-left">
+            <div class="logo">
+                <div class="logo-icon">👁️</div>
+                <div class="logo-text">
+                    <h1>DR Detection System</h1>
+                    <p class="subtitle">AI-Powered Diabetic Retinopathy Analysis</p>
+                </div>
+            </div>
+        </div>
+        <div class="nav-right">
+            <a href="/" class="nav-link">
+                <span class="nav-icon">📊</span> Metrics
+            </a>
+            <a href="/analyze" class="nav-link">
+                <span class="nav-icon">🔬</span> Analyze
+            </a>
+        </div>
+    </div>
+</nav>
+
+    <main class="container">
+        <h2 class="page-title">About This System</h2>
+
+        <div class="grid-2">
+            <div class="card">
+                <h3 class="card-title blue">System Overview</h3>
+                <p class="card-text">
+                An AI-powered system using transfer learning to analyze retinal images
+                from the APTOS dataset and detect diabetic retinopathy. 
+                It provides rapid, accurate risk assessments, helping healthcare 
+                professionals diagnose the condition at an early stage.            
+                </p>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title blue">Technology Stack</h3>
+                <div class="tech-stack">
+                    <p><strong>Backend:</strong> Flask, Python 3.9+</p>
+                    <p><strong>ML Models:</strong> InceptionV3, ResNet50</p>
+                    <p><strong>Image Processing:</strong> TensorFlow, OpenCV, CLAHE preprocessing</p>
+                    <p><strong>Frontend:</strong> HTML, CSS, JavaScript</p>
+                    <p><strong>Deployment:</strong> Docker</p>
+                </div>
+            </div>
+        </div>
+
+<div class="model-section">
+
+    <div class="grid-2">
+        <!-- Left box: InceptionV3 info -->
+        <div class="card">
+            <h4 class="notice-title">Model Information</h4>
+            <div class="model-info">
+                <p class="status-line">
+                    <span>Status:</span> 
+                    <span class="status-loaded">✓ Loaded</span>
+                </p>
+                <p>Type: InceptionV3 (Transfer Learning)</p>
+                <p>Input Size: 299x299</p>
+                <p>Trained on: APTOS 2019 Dataset</p>
+                <p>Classes: 5 (No DR, Mild, Moderate, Severe, Proliferative)</p>
+            </div>
+        </div>
+
+
+        <div class="notice-box ">
+            <h3 class="notice-title">Important Notice</h3>
+            <p class="notice-text">
+                This system is for educational and research purposes only.
+                It should not replace professional medical diagnosis.
+                Always consult qualified healthcare providers for medical decisions.
+            </p>
+        </div>
+    </div>
+</div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <h3>Diabetic Retinopathy Detection</h3>
+                <p>AI-powered medical analysis system</p>
+            </div>
+            <div class="footer-right">
+                <p>© 2025 DR Detection System by ❤️ Kaustubh & Kanishk</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

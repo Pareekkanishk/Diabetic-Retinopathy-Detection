@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DR Detection - Diagnosis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    <div class="logo-icon">👁️</div>
+                    <div class="logo-text">
+                        <h1>DR Detection System</h1>
+                        <p class="subtitle">AI-Powered Diabetic Retinopathy Analysis</p>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-right">
+                <a href="/" class="nav-link">
+                    <img src="static\images\house.png" class="home-icon" alt="Home">
+                    <span class="home-text">Home</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h2 class="page-title">Diabetic Retinopathy Diagnosis</h2>
+
+        <div class="diagnosis-wrapper">
+            <div class="upload-card">
+                <h3 class="card-title blue">Upload Retinal Image</h3>
+
+                <div class="upload-area" id="upload-area">
+                    <div class="upload-icon">📁</div>
+                    <p>Drag and drop your image here or click to browse</p>
+                    <p class="upload-hint">Supported formats: PNG, JPG, JPEG (Max 16MB)</p>
+                    <input type="file" id="file-input" accept="image/*" hidden>
+                    <button class="btn btn-primary" onclick="document.getElementById('file-input').click()">
+                        Choose Image
+                    </button>
+                </div>
+
+                <div id="preview-section" class="preview-section" style="display: none;">
+                    <div class="image-preview-box">
+                        <img id="preview-image" alt="Preview">
+                        <button class="btn btn-danger" id="remove-btn">Remove Image</button>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary btn-large" id="classify-btn">Analyze Risk</button>
+                    </div>
+                </div>
+
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Analyzing image...</p>
+                </div>
+            </div>
+
+            <div id="result-section" class="result-section" style="display: none;">
+                <div class="card result-card">
+                    <h3 class="card-title blue">Diagnosis Result</h3>
+
+                    <div class="result-main">
+                        <div class="result-prediction">
+                            <span class="result-label">Detected Condition:</span>
+                            <span class="result-value" id="prediction-result"></span>
+                        </div>
+                        <div class="result-confidence">
+                            <span class="result-label">Confidence:</span>
+                            <span class="result-value" id="confidence-result"></span>
+                        </div>
+                    </div>
+
+                    <div class="probability-bars" id="probability-bars"></div>
+
+                    <div class="recommendation-box" id="recommendation-box"></div>
+
+                    <button class="btn btn-secondary btn-full" id="reset-btn">Upload Another Image</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <h3>Diabetic Retinopathy Detection</h3>
+                <p>AI-powered medical analysis system</p>
+            </div>
+            <div class="footer-right">
+                <p>© 2025 DR Detection System by ❤️ Kaustubh & Kanishk</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const uploadArea = document.getElementById('upload-area');
+        const previewSection = document.getElementById('preview-section');
+        const previewImage = document.getElementById('preview-image');
+        const classifyBtn = document.getElementById('classify-btn');
+        const removeBtn = document.getElementById('remove-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const loading = document.getElementById('loading');
+        const resultSection = document.getElementById('result-section');
+
+        let selectedFile = null;
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#0066cc';
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = '#e5e7eb';
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#e5e7eb';
+            const file = e.dataTransfer.files[0];
+            handleFile(file);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            handleFile(file);
+        });
+
+        function handleFile(file) {
+            if (file && file.type.startsWith('image/')) {
+                selectedFile = file;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    previewImage.src = e.target.result;
+                    uploadArea.style.display = 'none';
+                    previewSection.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please select a valid image file');
+            }
+        }
+
+        removeBtn.addEventListener('click', () => {
+            selectedFile = null;
+            fileInput.value = '';
+            uploadArea.style.display = 'block';
+            previewSection.style.display = 'none';
+            resultSection.style.display = 'none';
+        });
+
+        resetBtn.addEventListener('click', () => {
+            selectedFile = null;
+            fileInput.value = '';
+            uploadArea.style.display = 'block';
+            previewSection.style.display = 'none';
+            resultSection.style.display = 'none';
+            document.querySelector('.upload-card').style.display = 'block';
+        });
+
+        classifyBtn.addEventListener('click', async () => {
+            if (!selectedFile) return;
+
+            loading.style.display = 'block';
+            resultSection.style.display = 'none';
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                loading.style.display = 'none';
+
+                if (data.success) {
+                    displayResults(data);
+                } else {
+                    alert('Error: ' + data.error);
+                }
+            } catch (error) {
+                loading.style.display = 'none';
+                alert('Error occurred during classification');
+            }
+        });
+
+        
+    </script>
+</body>
+
+</html>
