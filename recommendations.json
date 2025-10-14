@@ -1,0 +1,53 @@
+{
+  "0": {
+    "severity": "No DR",
+    "recommendations": [
+      "Continue regular annual eye examinations to monitor eye health",
+      "Maintain good blood sugar control (HbA1c < 7%)",
+      "Keep blood pressure under control (< 140/90 mmHg)",
+      "Follow a healthy diet and exercise regularly"
+    ]
+  },
+  "1": {
+    "severity": "Mild DR",
+    "recommendations": [
+      "Schedule a follow-up eye examination in 6-12 months",
+      "Strict blood glucose control is essential to prevent progression",
+      "Monitor blood pressure regularly and keep it within normal range",
+      "Avoid smoking and limit alcohol consumption",
+      "Report any vision changes immediately to your ophthalmologist"
+    ]
+  },
+  "2": {
+    "severity": "Moderate DR",
+    "recommendations": [
+      "Consult an ophthalmologist within 3-6 months for comprehensive evaluation",
+      "Achieve optimal glycemic control (HbA1c < 7%)",
+      "Consider more frequent eye examinations every 3-4 months",
+      "Manage blood pressure and lipid levels aggressively",
+      "Discuss potential treatment options with your eye specialist"
+    ]
+  },
+  "3": {
+    "severity": "Severe DR",
+    "recommendations": [
+      "Urgent consultation with ophthalmologist required within 1-2 weeks",
+      "Immediate intensive blood sugar management is critical",
+      "Laser photocoagulation therapy may be recommended",
+      "Monthly follow-up examinations are necessary",
+      "Avoid activities that increase eye pressure (heavy lifting, strenuous exercise)"
+    ]
+  },
+  "4": {
+    "severity": "Proliferative DR",
+    "recommendations": [
+      "Immediate medical attention needed - seek emergency eye care",
+      "Laser surgery (pan-retinal photocoagulation) is often required",
+      "Vitrectomy surgery may be necessary in advanced cases",
+      "Weekly or bi-weekly monitoring until condition stabilizes",
+      "Strict bed rest may be advised to prevent retinal detachment",
+      "Anti-VEGF injections may be recommended by your specialist"
+    ]
+  }
+}
+

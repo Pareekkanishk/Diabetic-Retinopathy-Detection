@@ -35,6 +35,51 @@ def analyze():
     return render_template('analyze.html')
 
 
+@app.route('/predict', methods=['POST'])
+def predict():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file uploaded'}), 400
+    
+    file = request.files['file']
+    
+    if file.filename == '':
+        return jsonify({'error': 'No file selected'}), 400
+    
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+        
+        try:
+            processed_img = preprocess_image(filepath, TARGET_SIZE)
+            predictions = model.predict(processed_img, verbose=0)
+            predicted_class = int(np.argmax(predictions[0]))
+            confidence = float(predictions[0][predicted_class]) * 100
+            
+            all_predictions = {
+                CLASS_NAMES[i]: float(predictions[0][i]) * 100 
+                for i in range(len(CLASS_NAMES))
+            }
+            
+            class_recommendations = RECOMMENDATIONS[str(predicted_class)]
+            
+            return jsonify({
+                'success': True,
+                'prediction': CLASS_NAMES[predicted_class],
+                'confidence': round(confidence, 2),
+                'all_predictions': all_predictions,
+                'recommendations': class_recommendations['recommendations'],
+                'severity': class_recommendations['severity'],
+                'image_path': f'/static/uploads/{filename}'
+            })
+        
+        except Exception as e:
+            return jsonify({'error': f'Prediction failed: {str(e)}'}), 500
+    
+    return jsonify({'error': 'Invalid file format'}), 400
+
+
+
 if __name__ == '__main__':
     Path(app.config['UPLOAD_FOLDER']).mkdir(parents=True, exist_ok=True)
     app.run(debug=True)

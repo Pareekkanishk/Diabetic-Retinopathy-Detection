@@ -22,7 +22,7 @@
             </div>
             <div class="nav-right">
                 <a href="/" class="nav-link">
-                    <img src="static\images\house.png" class="home-icon" alt="Home">
+                    <img src="static/images/house.png" class="home-icon" alt="Home">
                     <span class="home-text">Home</span>
                 </a>
             </div>
@@ -78,7 +78,6 @@
                     </div>
 
                     <div class="probability-bars" id="probability-bars"></div>
-
                     <div class="recommendation-box" id="recommendation-box"></div>
 
                     <button class="btn btn-secondary btn-full" id="reset-btn">Upload Another Image</button>
@@ -194,7 +193,45 @@
             }
         });
 
-        
+        function displayResults(data) {
+            document.getElementById('prediction-result').textContent = data.prediction;
+            document.getElementById('confidence-result').textContent = data.confidence + '%';
+
+            const probabilityBars = document.getElementById('probability-bars');
+            probabilityBars.innerHTML = '<h4>Probability Distribution</h4>';
+
+            const classOrder = ['No DR', 'Mild DR', 'Moderate DR', 'Severe DR', 'Proliferative DR'];
+
+            classOrder.forEach(className => {
+                const probability = data.all_predictions[className] || 0;
+                const barContainer = document.createElement('div');
+                barContainer.className = 'probability-bar-container';
+                barContainer.innerHTML = `
+                    <span class="probability-label">${className}</span>
+                    <div class="probability-bar-bg">
+                        <div class="probability-bar" style="width: ${probability}%"></div>
+                    </div>
+                    <span class="probability-value">${probability.toFixed(2)}%</span>
+                `;
+                probabilityBars.appendChild(barContainer);
+            });
+
+            const recommendationBox = document.getElementById('recommendation-box');
+
+            if (data.recommendations && data.recommendations.length > 0) {
+                let recommendationsHTML = '<h4>Recommendations</h4><ul class="recommendation-list">';
+                data.recommendations.forEach(rec => {
+                    recommendationsHTML += `<li>${rec}</li>`;
+                });
+                recommendationsHTML += '</ul>';
+                recommendationBox.innerHTML = recommendationsHTML;
+            } else {
+                recommendationBox.innerHTML = '<h4>Recommendations</h4><p>No recommendations available</p>';
+            }
+
+            document.querySelector('.upload-card').style.display = 'none';
+            resultSection.style.display = 'block';
+        }
     </script>
 </body>
 
