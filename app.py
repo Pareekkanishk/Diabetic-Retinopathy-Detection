@@ -78,8 +78,12 @@ def predict():
     
     return jsonify({'error': 'Invalid file format'}), 400
 
+@app.route('/metrics')
+def metrics():
+    return render_template('metrics.html')
+
 
 
 if __name__ == '__main__':
     Path(app.config['UPLOAD_FOLDER']).mkdir(parents=True, exist_ok=True)
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))

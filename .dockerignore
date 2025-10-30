@@ -1,0 +1,67 @@
+# exclude unnecessary files
+organized_dataset/
+train_dataset*/
+val_dataset*/
+test_*/
+*_images/
+*_cropped/
+*_clahe/
+*_preprocessed/
+
+models/*.h5
+models/resnet50.keras
+
+# notebooks and scripts
+*.ipynb
+*.ipynb_checkpoints/
+organize*.py
+split*.py
+
+# large files
+*.jar
+bfg-*.jar
+
+# Python
+__pycache__/
+*.pyc
+venv/
+env/
+
+# Uploads folder content
+static/uploads/*
+!static/uploads/.gitkeep
+```
+
+
+
+Create `.gcloudignore` file (similar to .dockerignore but for gcloud):
+```
+.git
+.gitignore
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+venv/
+env/
+
+# dataset folders
+organized_dataset/
+train_dataset/
+train_dataset_clahe/
+train_dataset_cropped/
+val_dataset/
+val_dataset_clahe/
+val_dataset_cropped/
+test_organized/
+test_cropped/
+test_preprocessed/
+
+# notebooks
+*.ipynb
+exp1.ipynb
+exp2.ipynb
+test.ipynb
+
+# necessary model
+models/resnet50.keras

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Performance Metrics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    <div class="logo-icon">👁️</div>
+                    <div class="logo-text">
+                        <h1>DR Detection System</h1>
+                        <p class="subtitle">AI-Powered Diabetic Retinopathy Analysis</p>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-right">
+                <a href="/" class="nav-link">
+                    <img src="static/images/house.png" class="home-icon" alt="Home">
+                    <span class="home-text">Home</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="metrics-header">
+            <h2 class="page-title">Model Performance Metrics</h2>
+            <p class="metrics-subtitle">Detailed performance statistics and trends for all deployed models</p>
+        </div>
+
+        <!-- Model Cards -->
+        <div class="model-cards-grid">
+            <!-- ResNet50 Card -->
+            <div class="metric-card">
+                <h3 class="metric-card-title">ResNet50</h3>
+                <div class="metric-row">
+                    <span class="metric-label">Accuracy</span>
+                    <span class="metric-value">90.00%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Precision</span>
+                    <span class="metric-value">91.00%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Recall</span>
+                    <span class="metric-value">90.00%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">F1-Score</span>
+                    <span class="metric-value">90.00%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Cohen's Kappa</span>
+                    <span class="metric-value">0.8527</span>
+                </div>
+            </div>
+
+            <!-- InceptionV3 Card -->
+            <div class="metric-card">
+                <h3 class="metric-card-title">InceptionV3</h3>
+                <div class="metric-row">
+                    <span class="metric-label">Accuracy</span>
+                    <span class="metric-value">95.00%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Precision</span>
+                    <span class="metric-value">96.00%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Recall</span>
+                    <span class="metric-value">95.00%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">F1-Score</span>
+                    <span class="metric-value">95.00%</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Cohen's Kappa</span>
+                    <span class="metric-value">0.9304</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Model Comparison Section -->
+        <div class="comparison-section">
+            <h3 class="section-title">Model Comparison</h3>
+            
+            <!-- Accuracy Comparison -->
+            <div class="comparison-metric">
+                <h4 class="comparison-label">ACCURACY</h4>
+                <div class="comparison-bars">
+                    <div class="comparison-bar-item">
+                        <span class="model-name">ResNet50</span>
+                        <div class="comparison-bar-bg">
+                            <div class="comparison-bar resnet" style="width: 90%"></div>
+                        </div>
+                        <span class="comparison-value">90.0%</span>
+                    </div>
+                    <div class="comparison-bar-item">
+                        <span class="model-name">InceptionV3</span>
+                        <div class="comparison-bar-bg">
+                            <div class="comparison-bar inception" style="width: 95%"></div>
+                        </div>
+                        <span class="comparison-value">95.0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Precision Comparison -->
+            <div class="comparison-metric">
+                <h4 class="comparison-label">PRECISION</h4>
+                <div class="comparison-bars">
+                    <div class="comparison-bar-item">
+                        <span class="model-name">ResNet50</span>
+                        <div class="comparison-bar-bg">
+                            <div class="comparison-bar resnet" style="width: 91%"></div>
+                        </div>
+                        <span class="comparison-value">91.0%</span>
+                    </div>
+                    <div class="comparison-bar-item">
+                        <span class="model-name">InceptionV3</span>
+                        <div class="comparison-bar-bg">
+                            <div class="comparison-bar inception" style="width: 96%"></div>
+                        </div>
+                        <span class="comparison-value">96.0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recall Comparison -->
+            <div class="comparison-metric">
+                <h4 class="comparison-label">RECALL</h4>
+                <div class="comparison-bars">
+                    <div class="comparison-bar-item">
+                        <span class="model-name">ResNet50</span>
+                        <div class="comparison-bar-bg">
+                            <div class="comparison-bar resnet" style="width: 90%"></div>
+                        </div>
+                        <span class="comparison-value">90.0%</span>
+                    </div>
+                    <div class="comparison-bar-item">
+                        <span class="model-name">InceptionV3</span>
+                        <div class="comparison-bar-bg">
+                            <div class="comparison-bar inception" style="width: 95%"></div>
+                        </div>
+                        <span class="comparison-value">95.0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- F1 Score Comparison -->
+            <div class="comparison-metric">
+                <h4 class="comparison-label">F1 SCORE</h4>
+                <div class="comparison-bars">
+                    <div class="comparison-bar-item">
+                        <span class="model-name">ResNet50</span>
+                        <div class="comparison-bar-bg">
+                            <div class="comparison-bar resnet" style="width: 90%"></div>
+                        </div>
+                        <span class="comparison-value">90.0%</span>
+                    </div>
+                    <div class="comparison-bar-item">
+                        <span class="model-name">InceptionV3</span>
+                        <div class="comparison-bar-bg">
+                            <div class="comparison-bar inception" style="width: 95%"></div>
+                        </div>
+                        <span class="comparison-value">95.0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cohen's Kappa Comparison -->
+            <div class="comparison-metric">
+                <h4 class="comparison-label">COHEN'S KAPPA</h4>
+                <div class="comparison-bars">
+                    <div class="comparison-bar-item">
+                        <span class="model-name">ResNet50</span>
+                        <div class="comparison-bar-bg">
+                            <div class="comparison-bar resnet" style="width: 85.27%"></div>
+                        </div>
+                        <span class="comparison-value">0.8527</span>
+                    </div>
+                    <div class="comparison-bar-item">
+                        <span class="model-name">InceptionV3</span>
+                        <div class="comparison-bar-bg">
+                            <div class="comparison-bar inception" style="width: 93.04%"></div>
+                        </div>
+                        <span class="comparison-value">0.9304</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-left">
+                <h3>Diabetic Retinopathy Detection</h3>
+                <p>AI-powered medical analysis system</p>
+            </div>
+            <div class="footer-right">
+                <p>© 2025 DR Detection System by ❤️ Kaustubh & Kanishk</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
